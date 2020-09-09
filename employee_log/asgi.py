@@ -1,5 +1,5 @@
 """
-ASGI config for time_tracking project.
+ASGI config for employee_log project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'time_tracking.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'employee_log.settings')
 
 application = get_asgi_application()
