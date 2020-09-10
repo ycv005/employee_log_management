@@ -14,8 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from generic_views import HomePage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HomePage.as_view(), name='home_page'),
+    path('', include(('users.urls', 'users'), namespace='users')),
 ]
+
+admin.site.site_header = "TimeLogEntry Admin"
+admin.site.index_title = "TimeLogEntry Interface"
+admin.site.site_title = admin.site.site_header

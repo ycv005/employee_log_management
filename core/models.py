@@ -31,7 +31,7 @@ class Activity(models.Model):
         verbose_name_plural = "Activities"
 
     def __str__(self):
-        return self.name
+        return self.code
 
 
 class Entry(models.Model):
@@ -59,8 +59,14 @@ class Entry(models.Model):
 
     @property
     def total_duration(self):
+        """
+        Entry's property for the total duration alloted
+        """
         return self.end_time - self.start_time
 
     @property
     def time_left(self):
+        """
+        Entry's property for the total duration left
+        """
         return self.end_time - timezone.now().replace(microsecond=0)

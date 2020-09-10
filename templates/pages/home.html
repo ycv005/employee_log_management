@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %} {% block title %} Home Page {% endblock title %}
+{% block content %}
+<div class="container-fluid">
+  {% if user.is_authenticated %}
+  <!-- Authenticated Content -->
+  {% else %}
+  <div class="alert alert-primary my-4" role="alert">
+    <h4 class="text-center">
+      Join TimeLogEntry to add entry here. <a href="{% url "users:login_page" %}">Login</a>
+    </h4>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock content %}

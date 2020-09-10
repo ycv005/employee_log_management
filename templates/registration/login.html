@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container col-5 login-signup">
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+    <h5 class="card-header text-center">Login</h5>
+    <div class="card-body">
+      <form id="login-form" method="post" action="{% url "users:login_page" %}">{% csrf_token %}
+        <table class="table">
+          <tr>
+            <td><label for="id_username">Email</label></td>
+            <td><input id="id_username" name="username" type="text" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><label for="id_password">Password</label></td>
+            <td><input id="id_password" name="password" type="password" class="form-control"></td>
+          </tr>
+        </table>
+        {% include 'base/form_error.html' with form=form %}
+        <input type="submit" value="Login" class="btn btn-primary" />
+      </form>
+    </div>
+    <p class="mt-2 ml-4">Don't have account- <a href="{% url "users:signup_page" %}">Sign Up</a></p>
+  </div>
+</div>
+{% endblock content %}
