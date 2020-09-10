@@ -1,11 +1,9 @@
-{% load tz %}
-{% if entires %}
-
-<div class="entry-list" id="{{ entires|length }}">
+<div class="entry-list mt-4">
+    {% if entires %}
     {% for obj in entires  %}
-    <div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card shadow p-3 mb-3 bg-white rounded">
         <div class="card-header">
-            Entry Name: {{ obj.name }}
+            <b>Task Name:</b> {{ obj.name }}
         </div>
         <div class="card-body px-0">
             <div class="row">
@@ -35,5 +33,5 @@
         </div>
     </div>
     {% endfor %}
+    {% endif %}
 </div>
-{% endif %}

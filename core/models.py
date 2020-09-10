@@ -2,6 +2,27 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
+from django.core.exceptions import ValidationError
+
+
+def validate_start_time(value):
+    """
+    Validate that a Entry should have a starting date & time in present
+    or Future (with 5 Minute negotation)
+    """
+    if value < timezone.now() - timedelta(minutes=5):
+        raise ValidationError(
+            "Starting Time should be in present or Future")
+
+
+def validate_end_time(value):
+    """
+    Validate that a Entry should have a ending less than 6 months
+    """
+    print("validating end time")
+    if value > timezone.now() + timedelta(days=31*6):
+        raise ValidationError(
+            "Ending Time should be less than 6 months")
 
 
 class Project(models.Model):
@@ -40,8 +61,8 @@ class Entry(models.Model):
     Represent record a log created by user to track projects.
     """
     name = models.CharField(max_length=255)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(validators=[validate_start_time])
+    end_time = models.DateTimeField(validators=[validate_end_time])
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -58,6 +79,13 @@ class Entry(models.Model):
     def __str__(self):
         return self.name
 
+    def clean(self):
+        """
+        Raise Error when a Start time of a Entry > End time of a Entry
+        """
+        if self.start_time >= self.end_time:
+            raise ValidationError("Start time should be less than End Time")
+
     @property
     def total_duration(self):
         """
@@ -70,17 +98,26 @@ class Entry(models.Model):
         """
         Entry's property for the total duration left
         """
-        return self.end_time - timezone.now().replace(microsecond=0)
+        time = self.end_time - timezone.now().replace(microsecond=0)
+        if time < timedelta(seconds=1):
+            time = timedelta(seconds=0)
+        return time
 
     @property
     def format_time_left(self):
         """
-        Format the time left.
+        Format the time left into Day-Hr-Min-Sec
         """
         time = self.end_time + timedelta(hours=5, minutes=30)
         return time.strftime("%m/%d/%Y %H:%M:%S")
 
     @property
+    def is_active(self):
+        """
+        Check the Expiry of the Entry
+        """
+        return timezone.now() < self.end_time
+
     def time_left_sec(self):
         """
         Format the time left in seconds.

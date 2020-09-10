@@ -20,7 +20,8 @@ from generic_views import HomePage
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home_page'),
-    path('', include(('users.urls', 'users'), namespace='users')),
+    path('', include('users.urls')),
+    path('log/', include('core.urls',)),
 ]
 
 admin.site.site_header = "TimeLogEntry Admin"
