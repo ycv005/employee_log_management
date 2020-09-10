@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 
 def validate_start_time(value):
@@ -78,6 +79,9 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('core:entry-detail', kwargs={'pk': self.pk})
 
     def clean(self):
         """

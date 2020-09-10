@@ -4,11 +4,11 @@
   {% if user.is_authenticated %}
   <div class="my-4">
     <div class="row">
-      <a class="btn btn-info mx-2" id="all-entry-list" href="{% url 'core:entry-add' %}">Add an Entry</a>
-      <a class="btn btn-info mx-2" id="all-entry-list">All Entry</a>
+      <a class="btn btn-info mx-2" id="add-entry" href="{% url 'core:entry-add' %}">Add an Entry</a>
+      <!-- <a class="btn btn-info mx-2" id="all-entry-list">All Entry</a> -->
       <a class="btn btn-info mx-2" id="self-entry-list">Your Entry</a>
     </div>
-    {% include 'pages/entry/list.html' with entires=object_list %}
+    {% include 'core/entry_list.html' with entires=object_list %}
   </div>
 
   {% else %}

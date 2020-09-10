@@ -5,5 +5,4 @@ $(document).ready(async function () {
             $this.html(event.strftime('%D days %H:%M:%S'));
         });
     });
-
 });

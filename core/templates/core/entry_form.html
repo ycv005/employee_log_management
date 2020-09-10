@@ -1,8 +1,18 @@
 {% extends 'base/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-<form method="post my-4">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+<div class="container col-6 my-4">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <h5 class="card-header text-center">Add an Entry</h5>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success">Done</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

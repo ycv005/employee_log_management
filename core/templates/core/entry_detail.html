@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Detail Page
+{% endblock title %}
+
+{% block content %}
+
+<div class="card text-center my-4 col-8">
+    <div class="card-header">
+        <p><b>Task Name:</b> {{ object.name }}</p>
+    </div>
+    <div class="card-body">
+        <p class="card-title">
+            <b>Created By:</b> {{ object.user.name|default_if_none:object.user.email }}
+        </p>
+        <p><b>Start time:</b> {{ object.start_time }}</p>
+        <p><b>End time:</b> {{ object.end_time }}</p>
+        <p><b>Under Project:</b> {{ object.project.name }}</p>
+        <p><b>Under Activity:</b> {{ object.activity.name }}</p>
+        <p><b>Total Time for the Task assigned:</b> {{ object.total_duration }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <p><b>Time Left</b>: <small class="badge badge-danger" id="time-left"
+                data-countdown="{{ object.format_time_left }}">
+            </small> sec</p>
+    </div>
+</div>
+{% endblock content %}

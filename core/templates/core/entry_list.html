@@ -3,7 +3,14 @@
     {% for obj in entires  %}
     <div class="card shadow p-3 mb-3 bg-white rounded">
         <div class="card-header">
-            <b>Task Name:</b> {{ obj.name }}
+            <div class="row">
+                <div class="col-12 col-md-10">
+                    <b>Task Name:</b> {{ obj.name }}</div>
+
+                <div class="col-12 col-sm-2 py-0">
+                    <a href="{{ obj.get_absolute_url }}" class="btn btn-info btn-sm py-0">See in Detail</a>
+                </div>
+            </div>
         </div>
         <div class="card-body px-0">
             <div class="row">
@@ -29,6 +36,7 @@
                 <div class="col-12 col-sm-3">
                     <p><b>Under Activity:</b> <small class="badge badge-success">{{ obj.activity }}</small></p>
                 </div>
+
             </div>
         </div>
     </div>

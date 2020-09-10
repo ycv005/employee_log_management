@@ -13,7 +13,7 @@ class SignUpView(generic.CreateView):
 
 class LoginView(generic.FormView):
     form_class = forms.AuthenticationForm
-    success_url = reverse_lazy('home_page')
+    success_url = reverse_lazy('home-page')
     template_name = 'registration/login.html'
 
     def form_valid(self, form):
@@ -23,4 +23,4 @@ class LoginView(generic.FormView):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(reverse_lazy('home-page'))
