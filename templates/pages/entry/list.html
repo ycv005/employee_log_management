@@ -1,0 +1,39 @@
+{% load tz %}
+{% if entires %}
+
+<div class="entry-list" id="{{ entires|length }}">
+    {% for obj in entires  %}
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+            Entry Name: {{ obj.name }}
+        </div>
+        <div class="card-body px-0">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <p><b>Start time:</b> <small>{{ obj.start_time }}</small></p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <p><b>End time:</b> <small>{{ obj.end_time }}</small></p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <p><b>Total Time:</b> <small>{{ obj.total_duration }}</small></p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <p><b>Time left: </b><small class="badge badge-danger" id="time-left"
+                            data-countdown="{{ obj.format_time_left }}">
+                        </small> sec</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-3">
+                    <p><b>Under Project:</b> <small class="badge badge-success">{{ obj.project }}</small></p>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <p><b>Under Activity:</b> <small class="badge badge-success">{{ obj.activity }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

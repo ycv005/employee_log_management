@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from datetime import timedelta
 
 
 class Project(models.Model):
@@ -70,3 +71,20 @@ class Entry(models.Model):
         Entry's property for the total duration left
         """
         return self.end_time - timezone.now().replace(microsecond=0)
+
+    @property
+    def format_time_left(self):
+        """
+        Format the time left.
+        """
+        time = self.end_time + timedelta(hours=5, minutes=30)
+        return time.strftime("%m/%d/%Y %H:%M:%S")
+
+    @property
+    def time_left_sec(self):
+        """
+        Format the time left in seconds.
+        """
+        td = self.time_left
+        seconds = td.seconds + td.days * 24 * 3600
+        return seconds
