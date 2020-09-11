@@ -2,10 +2,14 @@
 
 {% load crispy_forms_tags %}
 
+{% block title %}
+{{ page_title }}
+{% endblock title %}
+
 {% block content %}
 <div class="container col-6 my-4">
     <div class="card shadow p-3 mb-5 bg-white rounded">
-        <h5 class="card-header text-center">Add an Entry</h5>
+        <h5 class="card-header text-center">Add {{ page_title }}</h5>
         <div class="card-body">
             <form method="post">
                 {% csrf_token %}

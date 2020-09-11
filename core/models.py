@@ -48,13 +48,13 @@ class Activity(models.Model):
     name = models.CharField(max_length=255)
     code = models.CharField(
         max_length=5, unique=True,
-        help_text='Enter a short code.')
+        help_text="Enter a short code. For Ex-'Dev' for Development")
 
     class Meta:
         verbose_name_plural = "Activities"
 
     def __str__(self):
-        return self.code
+        return self.code + " - " + self.name
 
 
 class Entry(models.Model):
@@ -72,7 +72,9 @@ class Entry(models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name='entries')
     activity = models.ForeignKey(
-        Activity, on_delete=models.CASCADE, related_name='entries')
+        Activity, on_delete=models.CASCADE, related_name='entries',
+        help_text='Activity like Devlopment, Testing..'
+    )
 
     class Meta:
         verbose_name_plural = "Entries"

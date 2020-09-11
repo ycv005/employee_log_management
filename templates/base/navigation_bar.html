@@ -8,22 +8,38 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home-page' %}">Home</a>
-      </li>
       {% if user.is_authenticated %}
-      <li class="nav-item">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home-page' %}">All Entry</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:entry-list-self' %}">Your Entry</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:entry-add' %}">Add an Entry</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:project-add' %}">Add a Project</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:activity-add' %}">Add an Activity</a>
+      </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
       </li>
       {% else %}
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'users:login_page' %}">Login</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'users:signup_page' %}">SignUp</a>
       </li>
       {% endif %}
     </ul>
-
   </div>
 </nav>
