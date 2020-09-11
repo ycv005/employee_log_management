@@ -1,6 +1,6 @@
 # employee_log_management
 
-Track the entires of yourself & your employees realtime. **[With TestCases included]**
+Track the entires of yourself & your employees in the realtime. **[With TestCases included]**
 
 ## Screenshots
 
