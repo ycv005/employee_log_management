@@ -6,12 +6,18 @@ from django.http import HttpResponseRedirect
 
 
 class SignUpView(generic.CreateView):
+    """
+    View to handle user's signup
+    """
     form_class = UserCreationForm
     success_url = reverse_lazy('users:login_page')
     template_name = 'registration/signup.html'
 
 
 class LoginView(generic.FormView):
+    """
+    View to handle user's login
+    """
     form_class = forms.AuthenticationForm
     success_url = reverse_lazy('home-page')
     template_name = 'registration/login.html'
@@ -22,5 +28,8 @@ class LoginView(generic.FormView):
 
 
 def logout_view(request):
+    """
+    View to handle logout
+    """
     logout(request)
     return HttpResponseRedirect(reverse_lazy('home-page'))

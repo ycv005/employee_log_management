@@ -11,6 +11,10 @@ urlpatterns = [
     path('entry/me', views.UserEntryView.as_view(),
          name='entry-list-self'
          ),
-    path('project/add', views.ProjectCreateView.as_view(), name='project-add'),
-    path('activity/add', views.ActivityCreateView.as_view(), name='activity-add'),
+    path('project/add', views.ProjectCreateView.as_view(),
+         name='project-add'
+         ),
+    path('activity/add', views.ActivityCreateView.as_view(),
+         name='activity-add'
+         ),
 ]
