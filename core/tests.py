@@ -42,6 +42,20 @@ class EntryModelTest(TestCase):
         self.assertEquals(str(entry_obj), "test_entry")
         self.assertEquals(Entry.objects.count(), 1)
 
+    def test_entry_start_end_time_great(self):
+        """
+        Test entry model's field for- start > end time
+        """
+        try:
+            Entry.objects.create(
+                name="test_entry", start_time=timezone.now(),
+                end_time=timezone.now() - timedelta(days=1),
+                project=self.project, user=self.user, activity=self.activity
+            )
+        except:
+            pass
+        self.assertEquals(Entry.objects.count(), 0)
+
 
 class ActivityModelTest(TestCase):
     def test_activity_model(self):

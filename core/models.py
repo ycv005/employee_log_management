@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
 from django.urls import reverse
+from django.db.models.signals import pre_save
 
 
 def validate_start_time(value):
@@ -131,3 +132,14 @@ class Entry(models.Model):
         td = self.time_left
         seconds = td.seconds + td.days * 24 * 3600
         return seconds
+
+
+def pre_save_entry_handler(sender, instance, *args, **kwargs):
+    """
+    Raise Error when a Start time of a Entry > End time of a Entry
+    """
+    if instance.start_time >= instance.end_time:
+        raise ValidationError("Start time should be less than End Time")
+
+
+pre_save.connect(pre_save_entry_handler, Entry)
